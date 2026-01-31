@@ -79,7 +79,24 @@ export const Hero = () => {
                     </div>
                 </StaggerWrapper>
             </div>
-            <div className='absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2'><ScrollIndicator /></div>
+            {/* <div className='absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 md:animate-bounce'><ScrollIndicator /></div> */}
+            <StaggerWrapper delay={2.3}>
+  <div
+    className="
+      animate-item
+      opacity-0
+      filter blur-[8px]
+      translate-y-2
+      absolute
+      bottom-20 md:bottom-12
+      left-1/2
+      -translate-x-1/2
+    "
+  >
+    <ScrollIndicator />
+  </div>
+</StaggerWrapper>
+
             
         </div>
     );
