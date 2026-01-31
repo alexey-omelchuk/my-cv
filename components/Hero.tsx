@@ -1,0 +1,86 @@
+"use client";
+import React from 'react'
+import { Spotlight } from '@/lib/Spotlight'
+import { Text2GenerateEffect } from './ui/text2-generate-effect'
+import { FaBriefcase, FaFilePdf, FaLinkedin } from 'react-icons/fa'
+import { Github, Mail } from 'lucide-react'
+import { MagicButton } from './MagicButton'
+import { SocialMagicIcon } from './ui/SocialMagicIcon'
+import { StaggerWrapper } from './ui/StaggerWrapper'
+import ScrollIndicator from './ScrollIndicator';
+
+export const Hero = () => {
+    const socials = [
+        { id: 1, icon: <FaLinkedin className="h-5 w-5" />, link: "https://www.linkedin.com/in/alexey-omelchuk/" },
+        { id: 2, icon: <Github className="h-5 w-5" />, link: "https://github.com/alexey-omelchuk" },
+        { id: 3, icon: <Mail className="h-5 w-5" />, link: "mailto:alexeyeuk@gmail.com" },
+    ];
+
+    const purpleGradient = "bg-[conic-gradient(from_90deg_at_50%_50%,#CBACF9_0%,#A855F7_50%,#CBACF9_100%)]";
+    const redGradient = "bg-[conic-gradient(from_90deg_at_50%_50%,#FF0000_0%,#7F0000_50%,#FF0000_100%)]";
+
+    return (
+        <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-transparent py-10">
+            <Spotlight className="-top-40 left-0 md:left-60 h-screen w-[80vw]" fill="cyan"/>
+
+            {/* Redes Sociales */}
+            <div className="absolute top-6 right-6 md:top-10 md:right-12 z-[100]">
+                <StaggerWrapper delay={0.5}>
+                    <div className="animate-item opacity-0 filter blur-[8px] translate-y-2 flex gap-4">
+                        {socials.map((social) => (
+                            <SocialMagicIcon key={social.id} icon={social.icon} link={social.link} />
+                        ))}
+                    </div>
+                </StaggerWrapper>
+            </div>
+
+            <div className="-mt-24 md:mt-0 w-full relative z-10 flex flex-col items-center justify-center text-center px-4 md:px-6">
+                <div className="flex flex-col gap-y-1 md:gap-y-3">
+                    <Text2GenerateEffect 
+                        words="HI, I'M" 
+                        className="text-5xl md:text-7xl lg:text-[8rem] font-bold text-white font-[family-name:var(--font-syne)] uppercase tracking-tighter"
+                    />
+                    <Text2GenerateEffect 
+                        words="ALEXEY OMELCHUK" 
+                        className="text-5xl md:text-7xl lg:text-[8rem] font-bold font-[family-name:var(--font-syne)] uppercase tracking-tighter bg-gradient-to-r from-cyan-400 via-violet-500 to-emerald-400 bg-clip-text text-transparent text-glow pb-2"
+                    />
+                    
+                    <StaggerWrapper delay={1.5}>
+                        <div className="animate-item opacity-0 filter blur-[10px] translate-y-2 mt-1">
+                            <b><p className="text-white/40 uppercase tracking-[0.4em] text-[9px] md:text-sm italic">
+                                Full-Stack Developer & Cybersecurity Enthusiast
+                            </p></b>
+                        </div>
+                    </StaggerWrapper>
+                </div>
+
+                <StaggerWrapper delay={2.0}>
+                    <div className="animate-item opacity-0 filter blur-[10px] translate-y-4 mt-10 md:mt-14 flex flex-row items-center justify-center gap-2 md:gap-4 w-full max-w-[95vw] md:max-w-none mx-auto">
+                        
+                      <MagicButton 
+    text="Explore My Work"
+    icon={<FaBriefcase className="mr-1 text-white text-xs" />}
+    gradientColor={purpleGradient}
+    otherClasses="!w-full px-7 text-sm"
+/>
+
+
+                        
+                        <a href="/Alexey_Omelchuk_CV.pdf" download="Alexey_Omelchuk_CV.pdf" className="flex-1 md:flex-none">
+<MagicButton 
+    text="Download CV"
+    icon2={<FaFilePdf className="ml-4 text-white opacity-80 text-xs" />}
+    gradientColor={redGradient}
+    otherClasses="!w-full px-5 text-sm"
+/>
+
+                        </a>
+                        
+                    </div>
+                </StaggerWrapper>
+            </div>
+            <div className='absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2'><ScrollIndicator /></div>
+            
+        </div>
+    );
+};
