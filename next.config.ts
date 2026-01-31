@@ -1,10 +1,8 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-    basePath: '/alexey-omelchuk',
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  basePath: '/alexey-omelchuk',
   assetPrefix: '/alexey-omelchuk',
-  output: 'standalone',
-};
+  // Elimina la línea: output: 'standalone',
+}
 
-export default nextConfig;
+module.exports = nextConfig
