@@ -15,7 +15,7 @@ import { AboutMeSection } from "@/components/AboutMeSection";
 
 export default function Home() {
   return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col mx-auto sm:px-10 px-5">
+    <main className="relative bg-black-100 flex justify-center items-center flex-col mx-auto sm:px-10 px-5 overflow-clip">
       
       {/* CAPA DE FONDO GLOBAL (Z-0) */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
