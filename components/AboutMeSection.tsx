@@ -94,7 +94,9 @@ export const AboutMeSection = () => {
                 {contactInfo.map((info, i) => (
                   <a key={i} href={info.href} className="flex items-center gap-4 group transition-all">
                     <div className="p-3 bg-white/5 rounded-xl border border-white/5 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/5 transition-all">
-                      {React.cloneElement(info.icon as React.ReactElement, { className: "text-slate-400 group-hover:text-cyan-400 transition-colors" })}
+                      {React.cloneElement(info.icon as React.ReactElement<any>, { 
+  className: "text-slate-400 group-hover:text-cyan-400 transition-colors" 
+})}
                     </div>
                     <div>
                       <p className="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">{info.label}</p>
