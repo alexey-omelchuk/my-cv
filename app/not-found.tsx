@@ -11,17 +11,20 @@ import { BackgroundBeams } from '@/components/ui/background-beams'
 export default function NotFound() {
   return (
     <div className="min-h-screen w-full flex items-center justify-center pb-20 pt-36 relative bg-black-100 overflow-hidden">
-        {/* Contenedor de efectos de fondo */}
-        <div className="absolute inset-0 w-full h-full">
-            <SpotlightNew />
+        {/* Efectos de fondo para desktop */}
+        <div className="hidden md:block absolute inset-0 w-full h-full">
             <Spotlight className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen" fill="white"/>
             <Spotlight className="top-10 left-full h-[80vh] w-[50vw]" fill="#7f00ff"/>
-            {/* He quitado el spotlight verde para que el diseño sea más limpio y consistente con el azul/cyan */}
-            <Spotlight className="top-28 left-80 md:-left-32 h-[80vh] w-[50vw]" fill="cyan"/>
-            
             <SparklesPreview />
             <BackgroundBeams /> 
         </div>
+
+        {/* Efectos ligeros para móvil */}
+        <div className="block md:hidden absolute inset-0 w-full h-full">
+            <SpotlightNew />
+            <Spotlight className="top-28 left-4 h-[60vh] w-[80vw]" fill="cyan"/>
+        </div>
+
 
       <StaggerWrapper delay={0.2}>
         <div className="flex flex-col items-center z-10 px-5">
