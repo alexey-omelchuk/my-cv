@@ -26,7 +26,7 @@ export const Hero = () => {
             {/* Redes Sociales */}
             <div className="absolute top-6 right-6 md:top-10 md:right-12 z-[100]">
                 <StaggerWrapper delay={0.5}>
-                    <div className="animate-item opacity-0 filter blur-[8px] translate-y-2 flex gap-4">
+                    <div className="animate-item opacity-0 md:filter md:blur-[8px] translate-y-2 md:translate-y-4 flex gap-4">
                         {socials.map((social) => (
                             <SocialMagicIcon key={social.id} icon={social.icon} link={social.link} />
                         ))}
@@ -46,7 +46,7 @@ export const Hero = () => {
                     />
                     
                     <StaggerWrapper delay={1.5}>
-                        <div className="animate-item opacity-0 filter blur-[10px] translate-y-2 mt-1">
+                        <div className="animate-item opacity-0 md:filter md:blur-[10px] translate-y-2 md:translate-y-4 mt-1">
                             <b><p className="text-white/40 uppercase tracking-[0.4em] text-[9px] md:text-sm italic">
                                 Full-Stack Developer & Cybersecurity Enthusiast
                             </p></b>
@@ -55,7 +55,7 @@ export const Hero = () => {
                 </div>
 
                 <StaggerWrapper delay={2.0}>
-                    <div className="animate-item opacity-0 filter blur-[10px] translate-y-4 mt-10 md:mt-14 flex flex-row items-center justify-center gap-2 md:gap-4 w-full max-w-[95vw] md:max-w-none mx-auto">
+                    <div className="animate-item opacity-0 md:filter md:blur-[10px] translate-y-1 md:translate-y-4 mt-10 md:mt-14 flex flex-row items-center justify-center gap-2 md:gap-4 w-full max-w-[95vw] md:max-w-none mx-auto">
                         
                       <MagicButton 
     text="Explore My Work"
@@ -85,8 +85,8 @@ export const Hero = () => {
     className="
       animate-item
       opacity-0
-      filter blur-[8px]
-      translate-y-2
+      md:filter md:blur-[8px]
+      translate-y-1 md:translate-y-4
       absolute
       bottom-20 md:bottom-12
       left-1/2
