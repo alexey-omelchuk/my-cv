@@ -12,6 +12,7 @@ import { SparklesPreview } from '@/components/SparklesPreview'
 import { EducationSection } from "@/components/Education";
 import { LanguagesSection } from "@/components/LanguagesSection";
 import { AboutMeSection } from "@/components/AboutMeSection";
+import { LinkedInPostsSection } from "@/components/LinkedInPostsSection";
 
 export default function Home() {
   return (
@@ -42,8 +43,9 @@ export default function Home() {
         <TracingBeamContainer>
         <div className="flex flex-col gap-32 md:gap-60"> {/* Este gap es el que separa las secciones */}
             <AboutMeSection />
-            <EducationSection />
+            <LinkedInPostsSection />
             <CertificatesSection />
+            <EducationSection />
             <LanguagesSection />
         </div>
         </TracingBeamContainer>

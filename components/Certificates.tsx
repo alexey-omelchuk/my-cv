@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconX, IconZoomIn, IconShieldCheck, IconCertificate } from "@tabler/icons-react";
+import { EncryptedText } from "./ui/encrypted-text";
 
 interface Certificate {
   title: string;
@@ -20,56 +21,56 @@ const certificates: Certificate[] = [
     issuer: "INE Security",
     image: "/certs/ecpptv3.webp", 
     id: "168242587",
-    skills: ["Active Directory", "Pivoting", "Pentesting", "Web Hacking", "Security", "Web Hacking", "Privilege Escalation", "OWASP"],
+    skills: ["Active Directory", "Pivoting", "Pentesting", "Web Hacking", "Seguridad", "Escalada de Privilegios", "OWASP"],
   },
   {
-    title: "Full-Stack Development (Laravel & VueJS)",
+    title: "Desarrollo Full-Stack (Laravel & VueJS)",
     issuer: "Mastermind",
     image: "/certs/laravel-vue.webp",
     id: "b8d1d3c034634ca3966812b5b2917126",
-    skills: ["Laravel", "VueJS", "Full-Stack", "Architecture", "Database", "Architecture", "APIs"],
+    skills: ["Laravel", "VueJS", "Full-Stack", "Arquitectura", "Bases de Datos", "APIs"],
   },
   {
-    title: "Development of AI Agents",
+    title: "Desarrollo de Agentes de IA",
     issuer: "Platzi",
     image: "/certs/ai-agents.webp",
     id: "0a6a75c4-6e18-4c98-8b83-bb3eb42a1c0d",
-    skills: ["OpenAI API", "Chatbots", "NLP", "AI Integration", "Python","Prompt Engineering", "RAG", "Automation"],
+    skills: ["OpenAI API", "Chatbots", "NLP", "IA Integración", "Python", "Prompt Engineering", "RAG", "Automatización"],
   },
   {
-    title: "OpenAI Chatbots Development",
+    title: "Desarrollo de Chatbots con OpenAI",
     issuer: "Platzi",
     image: "/certs/develop-agents.webp",
     id: "31d2c4a7-2fec-4879-9491-f66d04812358",
-    skills: ["AI Agents", "OpenAI API", "Python", "Prompt Engineering", "LLMs", "NLP"],
+    skills: ["Agentes de IA", "OpenAI API", "Python", "Prompt Engineering", "LLMs", "NLP"],
   },
   {
-    title: "Linux: Operating System Level Programming in C",
+    title: "Linux: Programación a nivel de Sistema Operativo en C",
     issuer: "Mastermind",
     image: "/certs/linux-c.webp", 
     id: "01b1170fdcfb451e9e940c55373813dd",
-    skills: ["Linux", "C Programming", "Systems Programming", "Operating Systems", "Low-level", "System Calls", "Memory Management"],
+    skills: ["Linux", "Programación en C", "Sistemas", "Kernel", "Low-level", "System Calls", "Gestión de Memoria"],
   },
   {
-    title: "Wireless Network Hacking (WiFi)",
+    title: "Hacking de Redes Inalámbricas (WiFi)",
     issuer: "Mastermind",
     image: "/certs/wifi-hacking.webp", 
     id: "2a07c198cb5a4b49a646cb8268362ed2",
-    skills: ["Network", "Cybersecurity", "WiFi Hacking", "Wireless Security", "Aircrack-ng", "WPA/WPA2"],
+    skills: ["Redes", "Ciberseguridad", "WiFi Hacking", "Wireless Security", "Aircrack-ng", "WPA/WPA2"],
   },
   {
-    title: "Linux Customization Professional from Scratch",
+    title: "Personalización Profesional de Linux desde cero",
     issuer: "Hack4u",
     image: "/certs/linux.webp",
     id: "1443-2304-4220-4857",
-    skills: ["Linux", "Bash Scripting", "Customization", "System Administration", "Open Source", "Dotfiles"],
+    skills: ["Linux", "Bash Scripting", "Customization", "Admin Sistemas", "Open Source", "Dotfiles"],
   },
   {
-    title: "SEO and Web Positioning",
+    title: "SEO y Posicionamiento Web",
     issuer: "Platzi",
     image: "/certs/seo.webp",
     id: "f0ea40bb-c377-430f-becc-a6368548db5c",
-    skills: ["Technical SEO", "Google Analytics", "Search Console", "On-page SEO", "Keywords" ],
+    skills: ["SEO Técnico", "Google Analytics", "Search Console", "On-page SEO", "Keywords" ],
   },
 ];
 
@@ -101,13 +102,13 @@ export const CertificatesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-8xl font-bold text-white font-[family-name:var(--font-syne)] uppercase tracking-tighter leading-none">
-            Verified <br />
+            TÍTULOS Y <br />
             <span className="bg-gradient-to-r from-cyan-400 via-violet-500 to-emerald-400 bg-clip-text text-transparent text-glow">
-              CREDENTIALS
+              CERTIFICADOS
             </span>
           </h2>
-          <p className="text-white/40 mt-4 uppercase tracking-[0.3em] text-[10px] italic">
-            Verified industry certifications and specialized technical training
+          <p className="text-white/90 mt-4 uppercase tracking-[0.3em] text-[10px] italic">
+            <b><EncryptedText text="Certificaciones oficiales y formación técnica que he ido sacando" /></b>
           </p>
         </motion.div>
 
@@ -178,7 +179,7 @@ export const CertificatesSection = () => {
                       className="w-full py-2 rounded-xl text-[12px] font-bold text-white bg-white/5 border border-white/10 hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                     >
                       <IconZoomIn className="h-4 w-4 text-cyan-400" />
-                      ZOOM
+                      AMPLIAR
                     </CardItem>
                   </div>
                 </CardBody>
@@ -188,14 +189,13 @@ export const CertificatesSection = () => {
         </div>
       </div>
 
-      {/* --- MODAL DE ZOOM MEJORADO CON EXIT ANIMATION --- */}
       <AnimatePresence mode="wait">
         {selectedCert && (
           <motion.div
             key="modal-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }} // Animación de salida (fade out)
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/95 backdrop-blur-3xl"
             onClick={() => setSelectedCert(null)}
@@ -204,7 +204,7 @@ export const CertificatesSection = () => {
               key="modal-content"
               initial={{ scale: 0.8, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 20 }} // Animación de salida (scale down)
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="relative max-w-6xl w-full max-h-[90vh] bg-[#050505] border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.15)]"
               onClick={(e) => e.stopPropagation()}

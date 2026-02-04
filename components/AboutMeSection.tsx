@@ -10,19 +10,20 @@ import {
   IconBriefcase,
   IconSparkles
 } from "@tabler/icons-react";
+import { EncryptedText } from "./ui/encrypted-text";
 
 export const AboutMeSection = () => {
   const contactInfo = [
     { icon: <IconMail className="h-5 w-5" />, label: "Email", value: "alexeyeuk@gmail.com", href: "mailto:alexeyeuk@gmail.com" },
-    { icon: <IconPhone className="h-5 w-5" />, label: "Phone", value: "+34 677 64 56 85", href: "tel:+34677645685" },
-    { icon: <IconMapPin className="h-5 w-5" />, label: "Location", value: "Valencia", href: "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd60487c5d604077:0x150fdf31fdc5a6f6?sa=X&ved=1t:8290&ictx=111" },
+    { icon: <IconPhone className="h-5 w-5" />, label: "Teléfono", value: "+34 677 64 56 85", href: "tel:+34677645685" },
+    { icon: <IconMapPin className="h-5 w-5" />, label: "Ubicación", value: "Valencia", href: "https://www.google.com/maps/place/Val%C3%A8ncia,+Valencia/@39.4077852,-0.3615113,12z/data=!3m1!4b1!4m6!3m5!1s0xd604f4cf0efb06f:0xb4a351011f7f1d39!8m2!3d39.4738338!4d-0.3756348!16zL20vMGgzdHY?entry=ttu&g_ep=EgoyMDI2MDIwMy4wIKXMDSoASAFQAw%3D%3D" },
   ];
 
   return (
     <section id="about" className="w-full bg-transparent relative z-10 py-24">
       <div className="max-w-[98vw] mx-auto px-4">
         
-        {/* Título de la Sección estilo Foundation */}
+        {/* Título de la Sección */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -30,13 +31,13 @@ export const AboutMeSection = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-4xl md:text-8xl font-bold text-white font-[family-name:var(--font-syne)] uppercase tracking-tighter leading-none">
-              The&ensp;Hybrid <br />
+              EL MIX <br />
               <span className="bg-gradient-to-r from-cyan-400 via-violet-500 to-emerald-400 bg-clip-text text-transparent text-glow font-bold">
-                VISION
+                QUE FUNCIONA
               </span>
             </h2>
-            <p className="text-white/50 mt-6 uppercase tracking-[0.3em] text-[10px] italic">
-              <b>Constant learning in technology and business strategy</b>
+            <p className="text-white/90 mt-6 uppercase tracking-[0.3em] text-[10px] italic">
+              <b><EncryptedText text="Código, Negocio y sentido común con IA" /></b>
             </p>
           </motion.div>
         </div>
@@ -55,25 +56,29 @@ export const AboutMeSection = () => {
                   <IconUser className="text-cyan-400 h-6 w-6" />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight uppercase font-[family-name:var(--font-syne)]">
-                  About&ensp;Me
+                  Sobre mí
                 </h3>
               </div>
 
               <div className="space-y-6 text-slate-300 text-lg leading-relaxed text-justify font-light">
                 <p>
-                  I am currently a student pursuing a double degree in <span className="text-white font-bold">Computer Engineering and Business Administration</span>, with a strong inclination towards technology and the business world. I am currently in my <span className="text-cyan-400 font-bold">fourth year</span>, and my education allows me to develop a hybrid profile that combines programming skills with a solid foundation in management.
+                  Estoy en el <span className="text-cyan-400 font-bold">4º año</span> del doble grado de <span className="text-white font-bold">Ingeniería Informática y ADE</span>. ¿Por qué las dos? Porque me niego a ser el típico que pica código sin entender para qué sirve lo que está haciendo. Desde el principio tengo claro que de nada sirve ser el mejor programador si no ayuda a la empresa a ser más eficiente o a vender más.
                 </p>
                 
                 <p>
-                  I have advanced knowledge in <span className="text-white font-medium">Java, JavaScript, Bash, Linux, PHP, mySQL, and Git</span>, as well as an intermediate level in <span className="text-violet-400 font-medium italic">ethical hacking</span>, enabling me to detect and mitigate common vulnerabilities such as those in the <span className="text-white font-bold underline decoration-cyan-500/50">OWASP Top 10</span>. Additionally, I have experience in Python, Docker, and frameworks like React, Vue, and Laravel.
+                  Me muevo bien con <span className="text-white font-medium">Java, JavaScript (Next.js/React), Python, Linux y Docker</span>. Además, me obsesiona que las cosas sean seguras, así que le meto horas al <span className="text-violet-400 font-medium italic">hacking ético (eCPPTv3)</span> para no dejar agujeros (OWASP Top 10 y demás). Por cierto, esta web que tienes delante está montada con <span className="text-white font-bold">Next.js</span>.
                 </p>
 
                 <p>
-                  Although I am still in the process of learning and do not consider myself an expert in management, my education in ADE complements my technological skills in a balanced way, providing me with the necessary perspective to tackle projects that have an impact in competitive environments. 
+                  Sobre la <span className="text-emerald-400 font-bold">IA</span>: No la veo como un juguete para hacer resúmenes, sino como una herramienta de productividad bestial. La uso para automatizar las tareas pesadas (desde agentes en WhatsApp hasta sistemas RAG) y centrarme en lo que de verdad importa. Para mí, la IA es el puente que faltaba para que la tecnología y el negocio se entiendan de una vez por todas.
+                </p>
+
+                <p className="text-slate-400 italic text-base">
+                  No me vas a oír decir que soy un <span className="text-emerald-400 font-bold">experto</span> en nada; en un sector que corre tanto, esa palabra caduca rápido. Prefiero decir que me esfuerzo cada día por <span className="text-emerald-400 font-bold">aprender de los mejores</span> y superar lo que sabía ayer. Al final, el objetivo es que mi metodología sea cada vez más sólida y mis soluciones más reales.
                 </p>
 
                 <blockquote className="border-l-2 border-emerald-500/50 pl-6 py-2 italic text-emerald-400/80 text-base bg-emerald-500/5">
-                  &quot;I constantly strive to learn, both in the university setting and independently, and I adapt quickly to new challenges.&quot;
+                  "Menos teoría y más soluciones que funcionen en el mundo real. Así de simple."
                 </blockquote>
               </div>
             </div>
@@ -89,14 +94,14 @@ export const AboutMeSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               className="bg-black/40 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 shadow-xl"
             >
-              <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 italic opacity-50">Personal&ensp;Data</h4>
+              <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 italic opacity-50">¿Hablamos?</h4>
               <div className="space-y-6">
                 {contactInfo.map((info, i) => (
                   <a key={i} href={info.href} className="flex items-center gap-4 group transition-all">
                     <div className="p-3 bg-white/5 rounded-xl border border-white/5 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/5 transition-all">
                       {React.cloneElement(info.icon as React.ReactElement<any>, { 
-  className: "text-slate-400 group-hover:text-cyan-400 transition-colors" 
-})}
+                        className: "text-slate-400 group-hover:text-cyan-400 transition-colors" 
+                      })}
                     </div>
                     <div>
                       <p className="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">{info.label}</p>
@@ -115,10 +120,10 @@ export const AboutMeSection = () => {
             >
               <div className="flex items-center gap-3 mb-4 relative z-10">
                 <IconSparkles className="text-emerald-400 h-5 w-5 animate-pulse" />
-                <h4 className="text-white font-bold uppercase tracking-widest text-[10px] italic">Growth&ensp;Mindset</h4>
+                <h4 className="text-white font-bold uppercase tracking-widest text-[10px] italic">Mentalidad</h4>
               </div>
               <p className="text-slate-300 text-xs leading-relaxed italic relative z-10">
-                &quot;My constant desire to learn equips me to face challenges in both technological and business fields, contributing a strategic perspective.&quot;
+                "Uso la IA para dejar de hacer tareas de mono y centrarme en resolver problemas de verdad."
               </p>
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <IconBriefcase size={80} />

@@ -1,156 +1,107 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 
-type EncryptedTextProps = {
-  text: string;
-  className?: string;
-  /**
-   * Time in milliseconds between revealing each subsequent real character.
-   * Lower is faster. Defaults to 50ms per character.
-   */
-  revealDelayMs?: number;
-  /** Optional custom character set to use for the gibberish effect. */
-  charset?: string;
-  /**
-   * Time in milliseconds between gibberish flips for unrevealed characters.
-   * Lower is more jittery. Defaults to 50ms.
-   */
-  flipDelayMs?: number;
-  /** CSS class for styling the encrypted/scrambled characters */
-  encryptedClassName?: string;
-  /** CSS class for styling the revealed characters */
-  revealedClassName?: string;
-};
-
-const DEFAULT_CHARSET =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[];:,.<>/?";
-
-function generateRandomCharacter(charset: string): string {
-  const index = Math.floor(Math.random() * charset.length);
-  return charset.charAt(index);
-}
-
-function generateGibberishPreservingSpaces(
-  original: string,
-  charset: string,
-): string {
-  if (!original) return "";
-  let result = "";
-  for (let i = 0; i < original.length; i += 1) {
-    const ch = original[i];
-    result += ch === " " ? " " : generateRandomCharacter(charset);
-  }
-  return result;
-}
-
-export const EncryptedText: React.FC<EncryptedTextProps> = ({
+export const EncryptedText = ({
   text,
   className,
-  revealDelayMs = 50,
-  charset = DEFAULT_CHARSET,
-  flipDelayMs = 50,
-  encryptedClassName,
+  revealDelayMs = 30, // Más rápido
+  charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*",
+  flipDelayMs = 40,
   revealedClassName,
+  encryptedClassName,
+}: {
+  text: string;
+  className?: string;
+  revealDelayMs?: number;
+  charset?: string;
+  flipDelayMs?: number;
+  revealedClassName?: string;
+  encryptedClassName?: string;
 }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const [mounted, setMounted] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [revealCount, setRevealCount] = useState(0);
+  const [scramble, setScramble] = useState("");
+  const containerRef = useRef<HTMLSpanElement>(null);
 
-  const [revealCount, setRevealCount] = useState<number>(0);
-  const animationFrameRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number>(0);
-  const lastFlipTimeRef = useRef<number>(0);
-  const scrambleCharsRef = useRef<string[]>(
-    text ? generateGibberishPreservingSpaces(text, charset).split("") : [],
-  );
-
+  // Solución Hydration: No renderizar nada rándom en el servidor
   useEffect(() => {
-    if (!isInView) return;
+    setMounted(true);
+  }, []);
 
-    // Reset state for a fresh animation whenever dependencies change
-    const initial = text
-      ? generateGibberishPreservingSpaces(text, charset)
-      : "";
-    scrambleCharsRef.current = initial.split("");
-    startTimeRef.current = performance.now();
-    lastFlipTimeRef.current = startTimeRef.current;
-    setRevealCount(0);
+  // Detector de visibilidad nativo (más ligero)
+  useEffect(() => {
+    if (!mounted) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsIntersecting(true);
+    }, { threshold: 0.1 });
+    
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [mounted]);
 
-    let isCancelled = false;
+  // Animación optimizada con un solo bucle
+  useEffect(() => {
+    if (!isIntersecting || !text || !mounted) return;
 
-    const update = (now: number) => {
-      if (isCancelled) return;
+    let startTime = performance.now();
+    let lastFlip = 0;
+    let frameId: number;
 
-      const elapsedMs = now - startTimeRef.current;
-      const totalLength = text.length;
-      const currentRevealCount = Math.min(
-        totalLength,
-        Math.floor(elapsedMs / Math.max(1, revealDelayMs)),
-      );
+    const loop = (now: number) => {
+      const elapsed = now - startTime;
+      // Calculamos cuántas letras revelar
+      const count = Math.min(text.length, Math.floor(elapsed / revealDelayMs));
+      
+      setRevealCount(count);
 
-      setRevealCount(currentRevealCount);
-
-      if (currentRevealCount >= totalLength) {
-        return;
-      }
-
-      // Re-randomize unrevealed scramble characters on an interval
-      const timeSinceLastFlip = now - lastFlipTimeRef.current;
-      if (timeSinceLastFlip >= Math.max(0, flipDelayMs)) {
-        for (let index = 0; index < totalLength; index += 1) {
-          if (index >= currentRevealCount) {
-            if (text[index] !== " ") {
-              scrambleCharsRef.current[index] =
-                generateRandomCharacter(charset);
-            } else {
-              scrambleCharsRef.current[index] = " ";
-            }
+      // Solo cambiamos los símbolos rándom cada X milisegundos para no laguear
+      if (now - lastFlip > flipDelayMs) {
+        let result = "";
+        for (let i = 0; i < text.length; i++) {
+          if (i < count) {
+            result += text[i];
+          } else if (text[i] === " ") {
+            result += " ";
+          } else {
+            result += charset[Math.floor(Math.random() * charset.length)];
           }
         }
-        lastFlipTimeRef.current = now;
+        setScramble(result);
+        lastFlip = now;
       }
 
-      animationFrameRef.current = requestAnimationFrame(update);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(update);
-
-    return () => {
-      isCancelled = true;
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(animationFrameRef.current);
+      if (count < text.length) {
+        frameId = requestAnimationFrame(loop);
+      } else {
+        setScramble(text);
       }
     };
-  }, [isInView, text, revealDelayMs, charset, flipDelayMs]);
 
-  if (!text) return null;
+    frameId = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(frameId);
+  }, [isIntersecting, text, revealDelayMs, flipDelayMs, charset, mounted]);
+
+  // En el servidor o antes de montar, devolvemos el texto plano (Hydration fix)
+  if (!mounted) return <span className={className}>{text}</span>;
+
+  const currentDisplay = scramble || text;
 
   return (
-    <motion.span
-      ref={ref}
-      className={cn(className)}
-      aria-label={text}
-      role="text"
-    >
-      {text.split("").map((char, index) => {
-        const isRevealed = index < revealCount;
-        const displayChar = isRevealed
-          ? char
-          : char === " "
-            ? " "
-            : (scrambleCharsRef.current[index] ??
-              generateRandomCharacter(charset));
-
+    <span ref={containerRef} className={cn("inline-block whitespace-pre-wrap", className)}>
+      {currentDisplay.split("").map((char, i) => {
+        const isRevealed = i < revealCount;
         return (
           <span
-            key={index}
+            key={i}
             className={cn(isRevealed ? revealedClassName : encryptedClassName)}
           >
-            {displayChar}
+            {/* Usamos espacio de no ruptura para que el layout no salte */}
+            {char === " " ? "\u00A0" : char}
           </span>
         );
       })}
-    </motion.span>
+    </span>
   );
 };

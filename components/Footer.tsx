@@ -4,7 +4,7 @@ import { MagicButton } from './MagicButton'
 import { SocialMagicIcon } from './ui/SocialMagicIcon'
 import { FaLinkedin, FaLocationArrow } from 'react-icons/fa'
 import { Github, Mail } from 'lucide-react'
-import { motion } from "motion/react" // Asegúrate de usar "motion/react" si es tu config
+import { motion } from "framer-motion"
 
 function Footer() {
   const socials = [
@@ -25,14 +25,14 @@ function Footer() {
           className="text-center mb-10"
         >
           <h2 className="text-5xl md:text-8xl font-bold text-white font-[family-name:var(--font-syne)] uppercase tracking-tighter leading-none">
-            Ready&ensp;to <br />
+            ¿TRABAJAMOS&ensp; <br />
             <span className="bg-gradient-to-r from-cyan-400 via-violet-500 to-emerald-400 bg-clip-text text-transparent text-glow font-bold">
-              COLLABORATE?
+              JUNTOS?
             </span>
           </h2>
           
-          <p className="text-white/40 mt-8 uppercase tracking-[0.3em] text-[10px] md:text-xs italic max-w-md mx-auto">
-            <b>Reach out to me today and let&apos;s discuss how I can help you achieve your goals.
+          <p className="text-white/90 mt-8 uppercase tracking-[0.3em] text-[10px] md:text-xs italic max-w-md mx-auto">
+            <b>Escríbeme y vemos cómo puedo echarte una mano para sacar adelante tus proyectos.
           </b></p>
         </motion.div>
         
@@ -41,7 +41,7 @@ function Footer() {
           <a href="mailto:alexeyeuk@gmail.com">
             <MagicButton 
               icon={null} 
-              text="Contact Me" 
+              text="Escríbeme" 
               icon2={<FaLocationArrow className='ml-2'/>} 
             />
           </a>
@@ -50,8 +50,8 @@ function Footer() {
         {/* BARRA INFERIOR */}
         <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl px-6 md:px-10 gap-10 border-t border-white/5 pt-10">
           <div className="flex flex-col items-center md:items-start gap-1">
-            <p className='text-white/50 md:text-sm text-xs font-medium uppercase tracking-widest'>
-              © 2026 Alexey Omelchuk. All rights reserved.
+            <p className='text-white/90 md:text-sm text-xs font-medium uppercase tracking-widest'>
+              © 2026 Alexey Omelchuk. Todos los derechos reservados.
             </p>
           </div>
 

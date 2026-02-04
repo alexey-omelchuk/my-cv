@@ -28,9 +28,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alexey's CV",
-  description: "Website CV of Alexey",
-  //pon una titulo y mejor descripcion
+  title: "CV de Alexey Omelchuk",
+  description: "Currículum Vitae de Alexey Omelchuk - Full-Stack Developer, IA Developer y Pentester (Ciberseguridad Ofensiva)",
 };
 
 export default function RootLayout({
@@ -39,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body
         className={`${plusJakartaSans.variable} ${inter.variable}${geistSans.variable} ${geistMono.variable} antialiased`}
       >

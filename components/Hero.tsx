@@ -2,7 +2,7 @@
 import React from 'react'
 import { Spotlight } from '@/lib/Spotlight'
 import { Text2GenerateEffect } from './ui/text2-generate-effect'
-import { FaBriefcase, FaFilePdf, FaLinkedin } from 'react-icons/fa'
+import { FaBriefcase, FaFilePdf, FaLinkedin, FaUser, FaUserAstronaut } from 'react-icons/fa'
 import { Github, Mail } from 'lucide-react'
 import { MagicButton } from './MagicButton'
 import { SocialMagicIcon } from './ui/SocialMagicIcon'
@@ -10,6 +10,12 @@ import { StaggerWrapper } from './ui/StaggerWrapper'
 import ScrollIndicator from './ScrollIndicator';
 
 export const Hero = () => {
+    const scrollToNext = () => {
+        // Busca la sección por ID (asegúrate de que tu siguiente sección tenga id="education")
+        const nextSection = document.getElementById('about') || document.getElementById('services');
+        nextSection?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     const socials = [
         { id: 1, icon: <FaLinkedin className="h-5 w-5" />, link: "https://www.linkedin.com/in/alexey-omelchuk/" },
         { id: 2, icon: <Github className="h-5 w-5" />, link: "https://github.com/alexey-omelchuk" },
@@ -47,8 +53,8 @@ export const Hero = () => {
                     
                     <StaggerWrapper delay={1.5}>
                         <div className="animate-item opacity-0 md:filter md:blur-[10px] translate-y-2 md:translate-y-4 mt-1">
-                            <b><p className="text-white/40 uppercase tracking-[0.4em] text-[9px] md:text-sm italic">
-                                Full-Stack Developer & Cybersecurity Enthusiast
+                            <b><p className="text-white/90 uppercase tracking-[0.4em] text-[9px] md:text-sm italic">
+                                Full-Stack Developer / IA Developer / Offensive Cybersecurity
                             </p></b>
                         </div>
                     </StaggerWrapper>
@@ -58,8 +64,10 @@ export const Hero = () => {
                     <div className="animate-item opacity-0 md:filter md:blur-[10px] translate-y-1 md:translate-y-4 mt-10 md:mt-14 flex flex-row items-center justify-center gap-2 md:gap-4 w-full max-w-[95vw] md:max-w-none mx-auto">
                         
                       <MagicButton 
-    text="Explore My Work"
-    icon={<FaBriefcase className="mr-1 text-white text-xs" />}
+    text="Sobre mí"
+    handleClick={scrollToNext} 
+
+    icon={<FaUserAstronaut className="mr-1 text-white text-xl" />}
     gradientColor={purpleGradient}
     otherClasses="!w-full px-7 text-sm"
 />
@@ -68,8 +76,8 @@ export const Hero = () => {
                         
                         <a href="/Alexey_Omelchuk_CV.pdf" download="Alexey_Omelchuk_CV.pdf" className="flex-1 md:flex-none">
 <MagicButton 
-    text="Download CV"
-    icon2={<FaFilePdf className="ml-4 text-white opacity-80 text-xs" />}
+    text="Descargar CV"
+    icon2={<FaFilePdf className="ml-4 text-white opacity-80 text-xl" />}
     gradientColor={redGradient}
     otherClasses="!w-full px-5 text-sm"
 />

@@ -42,7 +42,7 @@ export default function NotFound() {
             <Link href="/alexey-omelchuk">
               <MagicButton
                 icon={null} 
-                text="Return Home"
+                text="Return Home&nbsp;&nbsp;&nbsp;"
                 icon2={<FaLocationArrow className="rotate-180" />} 
               />
             </Link>
