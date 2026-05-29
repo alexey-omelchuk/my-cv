@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
+import { NextIntlClientProvider } from "next-intl"; 
 
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 
 export const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-plus-jakarta', // Variable CSS para Tailwind
+  variable: '--font-plus-jakarta',
   display: 'swap',
 })
 
@@ -28,21 +29,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CV de Alexey Omelchuk",
-  description: "Currículum Vitae de Alexey Omelchuk - Full-Stack Developer, IA Developer y Pentester (Ciberseguridad Ofensiva)",
+  title: "Alexey's CV",
+  description: "Website CV of Alexey",
 };
 
 export default function RootLayout({
   children,
+  params, // 🔹 Next.js pasa los params de la ruta
 }: Readonly<{
   children: React.ReactNode;
+  params?: any;
 }>) {
+  // 🔹 importar traducciones dinámicamente según la ruta
+  const locale = params?.locale || "es";
+  const messages = require(`../locales/${locale}.json`);
+
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${plusJakartaSans.variable} ${inter.variable}${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
@@ -50,6 +58,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 //   basePath: '/alexey-omelchuk',
@@ -5,4 +9,4 @@ const nextConfig = {
   // Elimina la línea: output: 'standalone',
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig);

@@ -12,9 +12,12 @@ import { SparklesPreview } from '@/components/SparklesPreview'
 import { EducationSection } from "@/components/Education";
 import { LanguagesSection } from "@/components/LanguagesSection";
 import { AboutMeSection } from "@/components/AboutMeSection";
-import { LinkedInPostsSection } from "@/components/LinkedInPostsSection";
+import { useTranslations } from 'next-intl';
+
 
 export default function Home() {
+  const t = useTranslations();
+
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col mx-auto sm:px-10 px-5 overflow-clip">
       
@@ -39,13 +42,12 @@ export default function Home() {
         {/* <FloatingNav navItems={[{ name: "Home", link: "/", icon: <FaHome /> }]} /> */}
 
         <Hero /> 
-        
+
         <TracingBeamContainer>
         <div className="flex flex-col gap-32 md:gap-60"> {/* Este gap es el que separa las secciones */}
             <AboutMeSection />
-            <LinkedInPostsSection />
-            <CertificatesSection />
             <EducationSection />
+            <CertificatesSection />
             <LanguagesSection />
         </div>
         </TracingBeamContainer>
