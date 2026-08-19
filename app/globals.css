@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --black: #000;
+  --black-100: #000319;
+  --black-200: rgba(17, 25, 40, 0.75);
+  --black-300: rgba(255, 255, 255, 0.125);
+  --black-400: rgba(239, 229, 229, 0.926);
+
+  --white: #FFF;
+  --white-100: #BEC1DD;
+  --white-200: #C1C2D3;
+  --blue-100: #E4ECFF;
+  --purple: #CBACF9;
+
+  --font-primary: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617; /* Deep near-black blue */
+    --foreground: #f8fafc;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 1. CUSTOM TEXT SELECTION */
+::selection {
+  background: var(--purple);
+  color: var(--black-100);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* 2. GRADIENT TEXT (So headings don't look flat) */
+.heading-gradient {
+  background: linear-gradient(to bottom right, #fff 30%, rgba(255,255,255,0.5));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-plus-jakarta);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+
+
+/* 4. MESH GRADIENT (For corners and empty sections) */
+.mesh-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(203,172,249,0.15) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 5. GLASSMORPHISM (For cards and sections) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+}
+
+@theme inline {
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-plus-jakarta), var(--font-inter);
+  
+  @keyframes spotlight {
+    0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+    100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+  }
+}
+
+/* Keep previous utility classes */
+.bg-black-100 { background-color: var(--black-100); }
+.bg-purple { background-color: var(--purple); }
